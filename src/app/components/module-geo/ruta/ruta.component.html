@@ -1,0 +1,12 @@
+<h3>
+    Live Chat
+</h3>
+<p class="conectados">Estan <strong>{{ users }}</strong> usarios en linea..</p>
+<hr>
+<div class="div" *ngFor="let message of messages">
+    {{ message }}
+</div>
+<hr>
+<form (ngSubmit)="addChat()">
+    <input type="text" [(ngModel)]="message" name="message" placeholder="Mensaje..." autofocus autocomplete="off">
+</form>

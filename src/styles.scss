@@ -1,1 +1,67 @@
-/* You can add global styles to this file, and also import other style files */
+@import "~leaflet/dist/leaflet.css";
+body{
+    font-size: 12px;
+    font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    .ui-sidebar{
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    .ui-table{
+        font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
+        font-size: 11px !important;
+    }
+    .ui-table-head{
+        font-size: 11px;
+    }
+    input, textarea{
+        font-size: 11px !important;
+    }
+    // button{
+    //     font-size: 0.8em !important;
+    //     margin: .5em !important;
+    //     padding: .5em 0 !important;
+    // }
+    #boton{
+        font-size: 0.8em !important;
+        margin: .5em !important;
+        padding: .5em 0 !important;
+    }
+    #op{
+        font-size: 0.8em !important;
+        margin: .5em !important;
+        padding: .5em 0 !important;
+    }
+    label{
+        font-size: 11px !important;
+    }
+    .ui-paginator{
+        height: 60px;
+    }
+    .ui-panel-titlebar{
+        height: 40px;
+        padding: 0;
+        margin: 0;
+    }
+    .ui-paginator{
+        height: 40px;
+    }
+    .ui-card{
+        position: relative;
+        height: auto;
+        margin-bottom: 50px;
+
+    }
+    .ui-tabview-nav li a{
+        font-size: .8em !important;
+        font-weight: normal !important;
+    }
+    td{
+        padding: 0em .5em !important;
+    }
+    .leaflet-control-attribution{
+        display: none;
+    }
+}

@@ -1,0 +1,63 @@
+<div class="container">
+    <div (click)="display = true" class="menu">
+        <i class="pi pi-bars"></i>
+    </div>
+    <div class="logo">
+        <i class="pi pi-microsoft"></i>
+        <span>GEOTRACK</span>
+    </div>
+    <div class="usuario">
+        <i class="pi pi-user"></i>
+        <span>{{ nombre }}</span>
+    </div>
+    <div class="opciones">
+        <ul>
+            <li (click)="displayDialog = true"><a><i class="pi pi-sign-in"></i></a></li>
+            <li *ngIf="authService.isLoggedIn()"><a><i class="pi pi-cog"></i></a></li>
+            <li *ngIf="authService.isLoggedIn()" (click)="salirLogin()"><a><i class="pi pi-sign-out"></i></a></li>
+        </ul>
+    </div>
+</div>
+<!-- <p-sidebar [(visible)]="display" [style]="{width: '250px'}">
+    <app-menu></app-menu>
+</p-sidebar> -->
+<p-sidebar [(visible)]="display" [style]="{width: '250px'}">
+    <app-menu></app-menu>
+</p-sidebar>
+<p-dialog header=".::BIENVENIDO::." [(visible)]="displayDialog" [responsive]="false" showEffect="fade" [modal]="true"
+    [style]="{width: '300px'}">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)">
+        <div class="ui-g ui-fluid">
+
+            <div class="ui-g-12 contenedorImagen">
+                <img id="imgLogin" src="assets/img/login.png" alt="Geotrack">
+            </div>
+            <div class="ui-g-12">
+                <p-messages [(value)]="msgs" [closable]="false"></p-messages>
+            </div>
+            <div class="ui-g-12">
+                <div class="ui-inputgroup" style="margin: .5em;">
+                    <span class="ui-inputgroup-addon"><i class="pi pi-user" style="margin: .4em;"></i>
+                    </span>
+                    <input type="text" pInputText formControlName="usuario" placeholder="Ingrese usuario">
+                </div>
+                <div class="ui-inputgroup" style="margin: .5em;">
+                    <span class="ui-inputgroup-addon"><i class="pi pi-key" style="margin: .4em;"></i></span>
+                    <input type="password" pInputText formControlName="contraseña" placeholder="Ingresa contraseña">
+                </div>
+            </div>
+        </div>
+        <div class="ui-g ui-fluid">
+            <div class="ui-g-6">
+                <button type="submit" pButton icon="pi pi-save" style="font-size: 0.9em; padding: .3em;"
+                    label="Ingresar" pButton class="ui-button-rounded ui-button-primary"></button>
+            </div>
+            <div class="ui-g-6">
+                <button type="button" pButton icon="pi pi-replay" label="Cancelar"
+                    style="font-size: 0.9em; padding: .3em;" (click)="clean()"
+                    class="ui-button-rounded ui-button-info"></button>
+            </div>
+
+        </div>
+    </form>
+</p-dialog>

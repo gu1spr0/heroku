@@ -1,0 +1,27 @@
+<div class="content">
+    <p-card styleClass="ui-card-shadow">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)">
+            <div class="ui-g ui-fluid">
+                <div class="ui-g-12 ui-md-4 ui-sm-6">
+                    <div class="ui-inputgroup">
+                        <span class="ui-float-label">
+                            <input id="usuario" type="text" size="30" pInputText formControlName="usuario">
+                            <label for="usuario">Usuario *</label>
+                        </span>
+                    </div>
+                    <!-- <div class="ui-inputgroup">
+                        <span class="ui-inputgroup-addon"><i class="pi pi-user" style="line-height: 1.25;"></i></span>
+                        <input type="text" pInputText placeholder="contraseña">
+                    </div> -->
+                </div>
+            </div>
+            <div class="botones">
+                <button id="boton" type="submit" pButton icon="pi pi-save" style="font-size: 8px;" label="Save"
+                    pButton></button>
+                <button id="boton" type="button" pButton icon="pi pi-replay" label="Cancel"
+                    class="ui-button-warning"></button>
+
+            </div>
+        </form>
+    </p-card>
+</div>

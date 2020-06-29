@@ -1,0 +1,101 @@
+<form [formGroup]="usuarioForm" (ngSubmit)="onSubmit(usuarioForm.value)">
+    <div class="ui-g ui-fluid">
+        <div class="ui-g-12 ui-md-4 ui-sm-6">
+            <div class="ui-inputgroup">
+                <span class="ui-float-label">
+                    <p-dropdown [options]="estadosPersonas" filter="true" placeholder="Elija persona..."
+                        formControlName="cedula">
+                        <ng-template let-persona pTemplate="item">
+                            <span>{{ persona.label }}</span>
+                        </ng-template>
+                    </p-dropdown>
+                </span>
+            </div>
+        </div>
+
+        <div class="ui-g-12 ui-md-4 ui-sm-6">
+            <div class="ui-inputgroup">
+                <span class="ui-float-label">
+                    <input id="user" type="text" size="30" pInputText formControlName="user">
+                    <label for="user">Usuario *</label>
+                </span>
+            </div>
+        </div>
+
+        <div class="ui-g-12 ui-md-4 ui-sm-6">
+            <div class="ui-inputgroup">
+                <span class="ui-float-label">
+                    <p-dropdown [options]="estadosRoles" [showClear]="true" formControlName="rol"
+                        placeholder="Elije rol...">
+                    </p-dropdown>
+                </span>
+            </div>
+        </div>
+        <div class="ui-g-12 ui-md-4 ui-sm-6">
+            <div class="ui-inputgroup">
+                <span class="ui-float-label">
+                    <input id="pass" type="password" size="30" pPassword formControlName="contraseña">
+                    <label for="pass">Contraseña *</label>
+                </span>
+            </div>
+        </div>
+        <div class="ui-g-12 ui-md-4 ui-sm-6">
+            <div class="ui-inputgroup">
+                <span class="ui-float-label">
+                    <input id="passc" type="password" size="30" pPassword formControlName="contraseñac">
+                    <label for="passc">Repetir contraseña *</label>
+                </span>
+            </div>
+        </div>
+
+    </div>
+    <div class="botones">
+        <button id="boton" type="submit" pButton icon="pi pi-save" label="Save" pButton
+            [disabled]="!validForm()"></button>
+        <button id="boton" type="button" pButton icon="pi pi-replay" (click)="clean()" label="Cancel"
+            class="ui-button-warning"></button>
+
+    </div>
+</form>
+<p-table #dt [columns]="cols" [value]="usuarios" selectionMode="single" [(selection)]="selectedElement"
+    (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="10" [responsive]="true">
+    <ng-template pTemplate="caption">
+        <h3>LISTADO DE USUARIOS</h3>
+        <div style="text-align: center">
+            <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
+            <input type="text" pInputText size="30" placeholder="Buscar Usuario"
+                (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+        </div>
+    </ng-template>
+
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+            <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+                {{col.header}}
+                <p-sortIcon [field]="col.field" ariaLabel="Activate to sort"
+                    ariaLabelDesc="Activate to sort in descending order"
+                    ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
+            </th>
+        </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-rowData let-columns="columns">
+        <tr [pSelectableRow]="rowData">
+            <td *ngFor="let col of columns">
+                <div *ngIf="col.subfield;then nested_object_content else normal_content"></div>
+                <ng-template #nested_object_content>
+                    {{rowData[col.field][col.subfield]}}
+                </ng-template>
+                <ng-template #normal_content>
+                    {{rowData[col.field]}}
+                </ng-template>
+            </td>
+            <td style="width: 30px;">
+                <button type="button" pButton icon="pi pi-trash" (click)="displayDialog = true" class="ui-button-danger"
+                    id="op" label="Eliminar"></button>
+                <button type="button" pButton icon="pi pi-cog" (click)="displayDialog = true" class="ui-button-info"
+                    id="op"></button>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>

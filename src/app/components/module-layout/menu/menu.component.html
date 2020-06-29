@@ -1,0 +1,68 @@
+<div class="nav">
+    <ul>
+        <li class="titulo">
+            <span>GEOLOCALIZACION</span>
+        </li>
+        <a routerLink="/home" class="item">
+            <span class="elemento">Seguimiento</span>
+            <i class="pi pi-globe"></i>
+        </a>
+        <a routerLink="#" class="item">
+            <span class="elemento">Puntos de acopio</span>
+            <i class="pi pi-map-marker"></i>
+        </a>
+        <a routerLink="#" class="item">
+            <span class="elemento">Reportes</span>
+            <i class="pi pi-file"></i>
+        </a>
+        <span *ngIf=" rol === 'ADMIN' || rol === 'SUPERVISOR'">
+            <li class="titulo">
+                <span>RUTAS</span>
+            </li>
+            <a routerLink="#" class="item">
+                <span class="elemento">Microruta</span>
+                <i class="pi pi-list"></i>
+            </a>
+            <a routerLink="#" class="item">
+                <span class="elemento">Macroruta</span>
+                <i class="pi pi-table"></i>
+            </a>
+            <a routerLink="#" class="item">
+                <span class="elemento">Horarios</span>
+                <i class="pi pi-clock"></i>
+            </a>
+        </span>
+        <span *ngIf=" rol === 'ADMIN' || rol === 'SUPERVISOR'">
+            <li class="titulo">
+                <span>VEHICULO</span>
+            </li>
+            <a href="#" class="item">
+                <span class="elemento">Personal</span>
+                <i class="pi pi-users"></i>
+            </a>
+            <a routerLink="#" class="item">
+                <span class="elemento">Eventos</span>
+                <i class="pi pi-bell"></i>
+            </a>
+        </span>
+        <span *ngIf=" rol === 'ADMIN' || rol === 'SUPERVISOR'">
+            <li class="titulo">
+                <span>DISPOSITIVO</span>
+            </li>
+            <a routerLink="#" class="item">
+                <span class="elemento">Listar</span>
+                <i class="pi pi-wifi"></i>
+            </a>
+        </span>
+        <span *ngIf="rol === 'ADMIN'">
+            <li class="titulo">
+                <span>USUARIOS</span>
+            </li>
+            <a routerLink="/usuario" class="item">
+                <span class="elemento">Listar</span>
+                <i class="pi pi-folder"></i>
+            </a>
+
+        </span>
+    </ul>
+</div>

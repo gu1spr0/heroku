@@ -1,0 +1,144 @@
+<form [formGroup]="personaForm" (ngSubmit)="onSubmit(personaForm.value)">
+    <div class="ui-g ui-fluid">
+        <div class="ui-g-12 ui-md-4 ui-sm-6">
+            <div class="ui-inputgroup">
+                <span class="ui-float-label">
+                    <input id="cedula" type="text" size="30" pInputText formControlName="cedula">
+                    <label for="cedula">Cedula *</label>
+                </span>
+            </div>
+        </div>
+        <div class="ui-g-12 ui-md-4 ui-sm-6">
+            <div class="ui-inputgroup">
+                <span class="ui-float-label">
+                    <input id="nombre" type="text" size="30" pInputText formControlName="nombre">
+                    <label for="nombre">Nombre *</label>
+                </span>
+            </div>
+        </div>
+
+        <div class="ui-g-12 ui-md-4 ui-sm-6">
+            <div class="ui-inputgroup">
+                <span class="ui-float-label">
+                    <input id="paterno" type="text" size="30" pInputText formControlName="paterno">
+                    <label for="paterno">Paterno *</label>
+                </span>
+            </div>
+        </div>
+
+        <div class="ui-g-12 ui-md-4 ui-sm-6">
+            <div class="ui-inputgroup">
+                <span class="ui-float-label">
+                    <input id="materno" type="text" size="30" pInputText formControlName="materno">
+                    <label for="materno">Materno</label>
+                </span>
+            </div>
+        </div>
+
+        <div class="ui-g-12 ui-md-4 ui-sm-6">
+            <div class="ui-inputgroup">
+                <span class="ui-float-label">
+                    <input id="telefono" type="text" size="30" pInputText formControlName="telefono">
+                    <label for="telefono">Telefono</label>
+                </span>
+            </div>
+        </div>
+
+        <div class="ui-g-12 ui-md-4 ui-sm-6">
+            <div class="ui-inputgroup">
+                <span class="ui-float-label">
+                    <input id="celular" type="text" size="30" pInputText formControlName="celular">
+                    <label for="celular">Celular *</label>
+                </span>
+            </div>
+        </div>
+        <div class="ui-g-12 ui-md-4 ui-sm-6">
+            <div class="ui-inputgroup">
+                <span class="ui-float-label">
+                    <textarea id="direccion" [rows]="5" [cols]="30" pInputTextarea autoResize="autoResize"
+                        formControlName="direccion"></textarea>
+                    <label for="direccion">Direccion *</label>
+                </span>
+            </div>
+        </div>
+
+        <div class="ui-g-12 ui-md-4 ui-sm-6">
+            <div class="ui-inputgroup">
+                <span class="ui-float-label">
+                    <input id="email" type="text" size="30" pInputText formControlName="email">
+                    <label for="email">Email</label>
+                </span>
+            </div>
+        </div>
+        <div class="ui-g-12 ui-md-4 ui-sm-6">
+            <div class="ui-inputgroup">
+                <span class="ui-float-label">
+                    <p-dropdown [options]="estadosDepartamentos" [showClear]="true" formControlName="dep"
+                        placeholder="Expedido en...">
+                    </p-dropdown>
+                </span>
+            </div>
+        </div>
+
+    </div>
+    <div class="botones">
+        <button id="boton" type="submit" pButton icon="pi pi-save" style="font-size: 8px;" label="Save" pButton
+            [disabled]="!validForm()"></button>
+        <button id="boton" type="button" pButton icon="pi pi-replay" (click)="clean()" label="Cancel"
+            class="ui-button-warning"></button>
+
+    </div>
+</form>
+<p-table #dt [columns]="cols" [value]="personas" selectionMode="single" [(selection)]="selectedElement"
+    (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="5" [responsive]="true">
+    <ng-template pTemplate="caption">
+        <h3>LISTADO DE USUARIOS</h3>
+        <div style="text-align: center">
+            <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
+            <input type="text" pInputText size="30" placeholder="Buscar Usuario"
+                (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+        </div>
+    </ng-template>
+
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+            <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+                {{col.header}}
+                <p-sortIcon [field]="col.field" ariaLabel="Activate to sort"
+                    ariaLabelDesc="Activate to sort in descending order"
+                    ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
+            </th>
+        </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-rowData let-columns="columns">
+        <tr [pSelectableRow]="rowData">
+            <td *ngFor="let col of columns">
+                <div *ngIf="col.subfield;then nested_object_content else normal_content"></div>
+                <ng-template #nested_object_content>
+                    {{rowData[col.field][col.subfield]}}
+                </ng-template>
+                <ng-template #normal_content>
+                    {{rowData[col.field]}}
+                </ng-template>
+            </td>
+            <td>
+                <button id="op" type="button" pButton icon="pi pi-trash" label="Eliminar" (click)="showDialog(rowData)"
+                    class="ui-button-danger"></button>
+
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+<p-dialog header="Adevertencia..." [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true"
+    [style]="{width: '300px'}">
+    <p>Desea eliminar usuario??</p>
+    <p-footer>
+        <div class="ui-dialog-buttonpane ui-helper-clearfix">
+            <button type="button" pButton icon="pi pi-times" (click)="eliminarPersona()" label="Eliminar"
+                style="font-size: .8em"></button>
+            <button type="button" pButton icon="pi pi-save" (click)="closeDialog()" label="Cancelar"
+                style="font-size: .8em"></button>
+        </div>
+    </p-footer>
+</p-dialog>

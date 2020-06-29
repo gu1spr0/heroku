@@ -1,0 +1,144 @@
+// .container-fluid{
+//     margin: 0 !important;
+//     padding: 0 !important;
+
+// }
+// .header{
+//     height: 50px;
+//     background-color: #388e3c;
+//     /* background-color: #dce775; */
+// }
+// .row{
+//     margin: 0;
+// }
+// .col{
+//     margin: 0;
+//     height: 50px;
+//     color: white;
+// }
+// .col.boton{
+//     cursor: pointer;
+// }
+// .logo{
+//     background-color: #2e7d32;
+//     width: 200px;
+//     height: 50px;
+//     color: white;
+//     font-size: 17px;
+// }
+// .usuario{
+//     font-size: 11px;
+// }
+// .usuario span{
+//     margin-left: 5px;
+// }
+// .opcion{
+//     float: right;
+// }
+// a:hover{
+//     background-color: #2e7d32;
+//     transition-duration: .3s;
+//     cursor: pointer;
+// }
+// .nombre{
+//     margin-left: 1em;
+// }
+// .opcion i{
+//     font-size: 19px !important;
+// }
+
+.container{
+    background-color:#1ea04c;
+    width: 100%;
+    position: fixed;
+    z-index:80;
+    height: 50px;
+    color: white;
+    box-shadow: 1px 2px 8px rgba(0,0,0,0.6);
+    .menu{
+        display: none;
+        padding: 1.3em 1em;
+        height: 50px;
+    }
+    .menu:hover{
+        cursor: pointer;
+    }
+    .logo{
+        text-align: center;
+        width: 250px;
+        display: inline-block;
+        height: 50px;
+        padding: 1em 1em;
+        background-color: #138a3c;
+        span{
+            margin-left: 5px;
+            font-size: 1.4em;
+        }
+    }
+    .usuario{
+        display: inline-block;
+        padding: 1.3em 0.8em;
+        height: 50px;
+        i{
+            margin-right: 5px;
+        }
+        span{
+            font-size: 1em;
+        }
+    }
+    .usuario:hover{
+        background-color: #138a3c;
+        color: white;
+        cursor: pointer;
+        transition-duration: .3s;
+    }
+    .opciones{
+        float: right;
+        height: 50px;
+        margin-top: 1.4em;
+        margin-right: 1em;
+        ul{
+            display: inline-block;
+            margin: 0;
+        }
+        li{
+            display: inline-block;
+            list-style: none;
+        }
+        a{
+            padding: 1em;
+            text-decoration: none; 
+            border-radius: 50%;
+            i{
+                color: white;
+            }
+        }
+        a:hover{
+            background-color: #138a3c;
+            color: white;
+            cursor: hand;
+            transition-duration: .3s;
+            border-radius: 50%;
+        }
+    }
+}
+.contenedorImagen{
+    text-align: center;
+    #imgLogin{
+        width: 40%;
+    }
+}
+.ui-g-12{
+    padding: 0;
+    margin: 0;
+}
+@media only screen and (max-width: 599px){
+    .container{
+        .logo{
+            display: none;
+        }
+        .menu{
+            display: inline-block;
+        }
+    }
+}

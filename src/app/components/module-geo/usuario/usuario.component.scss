@@ -1,0 +1,54 @@
+
+// table{
+//     z-index: 15 !important;
+//     overflow: hidden !important;
+//     /* height: 100% !important;
+//     display: block;
+//     position: relative; */
+// }
+// td.mat-cell{
+//     font-size: 10px !important;
+// }
+
+// .row{
+//     padding: .5em;
+//     margin: 0;
+//     /* text-align: center; */
+// }
+// .col{
+//     padding: 0;
+//     margin: 0;
+// }
+// input{
+//     margin: 0;
+// }
+.content{
+    margin-left: 250px;
+    height: 100%;
+    padding: 1em;
+    font-size: 10px !important;
+    p-card{
+        height: auto;
+        p-table{
+            display: block;
+            position: relative;
+        }
+        // p-panel{
+        //     .botones{
+        //         padding: .5em 0;
+        //         button{
+        //             font-size: 11px;
+        //             margin: 0em .5em;
+        //             width: 80px;
+        //         }
+        //     }
+        // }
+    }
+}
+@media only screen and (max-width: 599px){
+    .content{
+      margin:0;
+      width: 100%;
+    }
+  }
+

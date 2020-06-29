@@ -1,0 +1,79 @@
+// .contenedor{
+//   position: relative;
+//   height: 100vh - 6vh;
+// }
+// #mapa {
+//   width: 100wv;
+//   height: 100%;
+//   padding: 0;
+//   margin: 0;
+// }
+// .contenedor{
+//   #mapa{
+//     width: 300px;
+//     height: 300px;
+//     margin: 0;
+//     padding: 0;
+//   }
+// }
+// #mapa{
+// width: 100px;
+// height: 100px;
+// }
+.contMapa{
+    margin-left: 250px;
+    position: relative;
+    height: 100vh - 5.3vh;
+    z-index: 5 !important;
+    #mapa{
+      width: 100wv;
+      height: 100%;
+    }
+  }
+  // p-dialog{
+  //   .opcion{
+  //     #iniciar{
+  //       width: 100%;
+  //     }
+  //   }
+  // }
+  @media only screen and (max-width: 320px){
+    .contMapa{
+      position: relative;
+      margin: 0;
+      padding: 0;
+      height: 60vh !important;
+      width: 100%;
+    }
+  }
+  
+  @media only screen and (max-width: 480px){
+    .contMapa{
+      position: relative;
+      margin: 0;
+      padding: 0;
+      height: 93.2vh !important;
+      width: 100%;
+    }
+  }
+  
+  @media only screen and (max-width: 599px){
+    .contMapa{
+      position: relative;
+      margin: 0;
+      padding: 0;
+      height: 100vh - 6.7vh !important;
+      width: 100%;
+    }
+  }
+  @media only screen and (max-width: 699px){
+    .contMapa{
+      position: relative;
+      margin: 0;
+      padding: 0;
+      height: 100vh - 5.3vh !important;
+      width: 100%;
+    }
+  }
+  
+  
