@@ -1,0 +1,154 @@
+#define TINY_GSM_MODEM_SIM900
+#define SerialMon Serial
+#define SerialAT Serial2
+#define TINY_GSM_DEBUG SerialMon
+#define GSM_PIN ""
+String ARDUINO_ID = "ARD-100";
+String MQTT_USER = "guillermo";
+String MQTT_PASS = "Kuillerlearsi10+";
+#define MQTT_BROKER "68.183.101.117"
+#define MQTT_PORT 1883
+const char apn[] = "4g.entel";
+const char gprsUser[] = "";
+const char gprsPass[] = "";
+const char* broker = "68.183.101.117";
+String topicGps = "LatLon";
+String endpoint = "";
+#include <TinyGsmClient.h>
+#include <PubSubClient.h>
+#include <TinyGPS.h>
+#include <LiquidCrystal.h>
+TinyGsm modem(SerialAT);
+TinyGPS GPS;
+TinyGsmClient client(modem,0);
+PubSubClient mqtt(client);
+LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
+void setup() {
+  endpoint = topicGps+"/"+ARDUINO_ID;
+  inicializarLcd();
+  inicializarMqtt();
+}
+void inicializarLcd(){
+  lcd.begin(16,2);
+  Serial1.begin(9600);
+  lcd.clear();
+  lcd.setCursor(0,0);
+  lcd.print(ARDUINO_ID);
+  lcd.setCursor(0,1);
+  lcd.print("GPS + LCD");
+  delay(5000);
+  lcd.clear();
+  lcd.setCursor(0,0);
+  lcd.print(" INICIANDO GPS");
+  lcd.setCursor(0,1);
+  lcd.print("----------------");
+}
+void inicializarMqtt(){
+  SerialMon.begin(19200);
+  delay(10);
+  SerialMon.println("Espere...");
+  SerialAT.begin(19200);
+  delay(6000);
+  SerialMon.println("Iniciando modem...");
+  modem.restart();
+  //modem.init();
+  String modemInfo = modem.getModemInfo();
+  SerialMon.print("Modem Info: ");
+  SerialMon.println(modemInfo);
+  if ( GSM_PIN && modem.getSimStatus() != 3 ) {
+    modem.simUnlock(GSM_PIN);
+  }
+  SerialMon.print("Esperando red...");
+  if (!modem.waitForNetwork()) {
+    SerialMon.println(" Error de red");
+    delay(10000);
+    return;
+  }
+  SerialMon.println(" Red correcta");
+  
+  if (modem.isNetworkConnected()) {
+    SerialMon.println("Conexion de Red GPRS Realizada");
+  }
+  
+  SerialMon.print(F("Conectando a "));
+  SerialMon.print(apn);
+  if (!modem.gprsConnect(apn, gprsUser, gprsPass)) {
+    SerialMon.println(" Error");
+    delay(10000);
+    return;
+  }
+  SerialMon.println(" Exito");
+
+  if (modem.isGprsConnected()) {
+    SerialMon.println("GPRS Conectado");
+  }
+  
+  mqtt.setServer(MQTT_BROKER, MQTT_PORT);
+  mqtt.setCallback(mqttCallback);
+  reconnect();
+}
+void loop() {
+  float latitude, longitude, velocidad;
+  mqtt.loop();
+  
+  if(!mqtt.connected()){
+    reconnect();
+  }
+  if (Serial1.available()) {
+    int c = Serial1.read();
+    if(GPS.encode(c)){
+      GPS.f_get_position(&latitude, &longitude);
+      velocidad = GPS.f_speed_kmph();
+      lcd.clear();
+      lcd.setCursor(0,0);
+      lcd.print("Lat= ");
+      lcd.setCursor(7,0);
+      lcd.print(latitude, 6);
+      lcd.setCursor(0,1);
+      lcd.print("Lon= ");
+      lcd.setCursor(6,1);
+      lcd.print(longitude,6);
+      //SerialMon.println(payloadGps(latitude,longitude));
+      mqtt.publish(endpoint.c_str(), payloadGps(latitude, longitude, velocidad).c_str());
+      delay(3000);
+    }
+    
+  }
+}
+
+void mqttCallback(char* topic, byte* payload, unsigned int len){
+  SerialMon.print("Message arrived [");
+  SerialMon.print(topic);
+  SerialMon.print("]: ");
+  SerialMon.write(payload, len);
+  SerialMon.println();
+  if (String(topic) == topicGps) {
+    mqtt.subscribe(endpoint.c_str());
+  }
+}
+void reconnect(){
+  while(!mqtt.connected()){
+    if(mqtt.connect(ARDUINO_ID.c_str(),MQTT_USER.c_str(),MQTT_PASS.c_str())){
+      SerialMon.println(" Conexion al Brocker correcta");
+      mqtt.subscribe(endpoint.c_str());
+      mqtt.connected();
+    }else{
+      SerialMon.print("Failed, rc=");
+      SerialMon.print(mqtt.state());
+      SerialMon.println("Reintentando");
+    }
+  }
+}
+
+String payloadGps(float latitude, float longitude, float velocidad){
+  String dataString = "";
+  String la = String(latitude,6);
+  String lo = String(longitude,6);
+  
+  dataString = "{\"sensorID\":\""+ARDUINO_ID;
+  dataString  = dataString + "\",\"latitud\":\""  + la;
+  dataString  = dataString + "\",\"longitud\":\""  + lo;
+  dataString = dataString + "\",\"velocidad\":\"" + velocidad;
+  dataString  = dataString + "\"}";
+  return dataString;
+}

@@ -7,12 +7,14 @@ import { HomeComponent } from '../components/module-geo/home/home.component';
 import { ConfiguracionComponent } from '../components/module-geo/configuracion/configuracion.component';
 import { RutaComponent } from '../components/module-geo/ruta/ruta.component';
 import { AuthGuard } from '../helpers/auth.guard';
+import { DispositivoComponent } from '../components/module-geo/dispositivo/dispositivo.component';
 const appRoutes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
     { path: 'login', component: LoginComponent },
     { path: 'usuario', component: UsuarioComponent, canActivate: [AuthGuard], data: { roles: [Role.ADMIN] } },
     { path: 'home', component: HomeComponent },
     { path: 'configuracion', component: ConfiguracionComponent },
+    { path: 'dispositivo', component: DispositivoComponent },
     { path: 'ruta', component: RutaComponent },
     { path: '***', component: HomeComponent }
 ];

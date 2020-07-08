@@ -23,32 +23,34 @@ import { routing, appRouteingProvider } from './routes/app.routing';
 import { PersonaService } from './services/persona.service';
 import { environment } from '../environments/environment';
 //Formularios primeng
-import { ButtonModule } from 'primeng/button';
-import { MenubarModule } from 'primeng/menubar';
-import { SidebarModule } from 'primeng/sidebar';
-import { PanelMenuModule } from 'primeng/panelmenu';
-import { TabViewModule } from 'primeng/tabview';
-import { CodeHighlighterModule } from 'primeng/codehighlighter';
-import { CardModule } from 'primeng/card';
-import { TableModule } from 'primeng/table';
-import { DialogModule } from 'primeng/dialog';
-import { InputTextModule } from 'primeng/inputtext';
-import { DropdownModule } from 'primeng/dropdown';
-import { PanelModule } from 'primeng/panel';
-import { ToastModule } from 'primeng/toast';
-import { MessagesModule } from 'primeng/messages';
-import { MessageModule } from 'primeng/message';
-import { InputTextareaModule } from 'primeng/inputtextarea';
-import { PasswordModule } from 'primeng/password';
+import { ButtonModule } from 'primeng-lts/button';
+import { MenubarModule } from 'primeng-lts/menubar';
+import { SidebarModule } from 'primeng-lts/sidebar';
+import { PanelMenuModule } from 'primeng-lts/panelmenu';
+import { TabViewModule } from 'primeng-lts/tabview';
+import { CodeHighlighterModule } from 'primeng-lts/codehighlighter';
+import { CardModule } from 'primeng-lts/card';
+import { TableModule } from 'primeng-lts/table';
+import { DialogModule } from 'primeng-lts/dialog';
+import { InputTextModule } from 'primeng-lts/inputtext';
+import { DropdownModule } from 'primeng-lts/dropdown';
+import { PanelModule } from 'primeng-lts/panel';
+import { ToastModule } from 'primeng-lts/toast';
+import { MessagesModule } from 'primeng-lts/messages';
+import { MessageModule } from 'primeng-lts/message';
+import { InputTextareaModule } from 'primeng-lts/inputtextarea';
+import { PasswordModule } from 'primeng-lts/password';
 import { UsuarioService } from './services/usuario.service';
-import { MessageService } from 'primeng/api';
+import { MessageService } from 'primeng-lts/api';
 import { DepartamentoService } from './services/departamento.service';
 import { RolService } from './services/rol.service';
 import { AuthService } from './services/auth.service';
 import { HelperService } from './services/helper.service';
 import { JwtInterceptor } from './helpers/jwt.interceptor';
 //MQTT Service
-import { IMqttMessage, MqttModule, IMqttServiceOptions } from 'ngx-mqtt';
+import { MqttModule, IMqttServiceOptions } from 'ngx-mqtt';
+import { DispositivoService } from './services/dispositivo.service';
+import { BrokerService } from './services/broker.service';
 const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
   hostname: '68.183.101.117',
   connectOnCreate: true,
@@ -104,10 +106,10 @@ const config: SocketIoConfig = {
     MessageModule,
     MessagesModule,
     InputTextareaModule,
-    PasswordModule,
+    PasswordModule
   ],
   // tslint:disable-next-line: max-line-length
-  providers: [appRouteingProvider, PersonaService, UsuarioService, DepartamentoService, RolService, MessageService, AuthService, HelperService,
+  providers: [appRouteingProvider, BrokerService, DispositivoService, PersonaService, UsuarioService, DepartamentoService, RolService, MessageService, AuthService, HelperService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })

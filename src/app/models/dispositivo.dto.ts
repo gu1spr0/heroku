@@ -1,14 +1,14 @@
 import { UbicacionDto } from './ubicacion.dto';
 export class DispositivoDto {
-    readonly dispositivoId: number;
-    readonly ubicaciones: UbicacionDto[];
-    readonly nombre: string;
-    readonly descripcion: string;
-    readonly marca: string;
-    readonly modelo: string;
-    readonly sub: string;
-    readonly pub: string;
-    readonly ip: string;
-    readonly mac: string;
-    readonly valido: string;
+    dispositivoId: number;
+    ubicaciones: UbicacionDto[];
+    nombre: string;
+    descripcion: string;
+    marca: string;
+    modelo: string;
+    sub: string;
+    pub: string;
+    ip: string;
+    // mac: string;
+    valido: string;
 }

@@ -1,4 +1,4 @@
-import { SelectItem, MessageService, FilterUtils } from 'primeng/api';
+import { SelectItem, MessageService, FilterUtils } from 'primeng-lts/api';
 import { Component, OnInit } from '@angular/core';
 import { PersonaDto } from '../../../../models/persona.dto';
 import { DepartamentoDto } from '../../../../models/departamento.dto';

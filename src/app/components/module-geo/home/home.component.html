@@ -1,6 +1,6 @@
 <!-- <div id="mapa"></div> -->
 <p-dialog header="Geolocalizacion" [closable]="false" [resizable]="false" [draggable]="false"
-    [(visible)]="ventanaLocalizacion" [responsive]="true" showEffect="fade" [modal]="true" [style]="{width: '300px'}">
+    [(visible)]="ventanaLocalizacion" showEffect="fade" [modal]="true" [style]="{width: '300px'}">
     <h4>Iniciar tracking a partir de su ubicacion...</h4>
     <div class="ui-g ui-fluid">
         <div class="ui-g-12 contenedorImagen">
@@ -13,4 +13,10 @@
 </p-dialog>
 <div class="contMapa">
     <div id="mapa"></div>
+    <div class="ui-inputgroup dispositivo">
+        <span class="ui-float-label">
+            <p-dropdown [options]="estadosDispositivos" [showClear]="true" [(ngModel)]="dispositivo">
+            </p-dropdown>
+        </span>
+    </div>
 </div>
