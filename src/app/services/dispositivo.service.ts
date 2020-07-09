@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { ConfiguracionService } from './configuracion.service';
 import { Observable } from 'rxjs';
 import { DispositivoDto } from '../models/dispositivo.dto';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -26,5 +27,10 @@ export class DispositivoService {
   }
   eliminarDispositivo(id): Observable<any> {
     return this.http.delete(this.url + 'dispositivo/' + id);
+  }
+  leerFichero(): Observable<any> {
+    return this.http.get('assets/js/data.txt', { responseType: 'text' });
+
+
   }
 }

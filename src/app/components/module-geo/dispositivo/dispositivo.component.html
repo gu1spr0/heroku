@@ -71,10 +71,11 @@
                     <div class="botones">
                         <button id="boton" type="submit" pButton icon="pi pi-save" style="font-size: 8px;"
                             label="Guardar" pButton [disabled]="!validForm()"></button>
-                        <button id="boton" type="button" pButton icon="pi pi-replay" (click)="clean()" label="Cancel"
+                        <button id="boton" type="button" pButton icon="pi pi-replay" (click)="clean()" label="Cancelar"
                             class="ui-button-warning"></button>
                         <button id="boton" type="button" pButton icon="pi pi-file"
-                            (click)="generar(dispositivoForm.value)" label="Generar" class="ui-button-info"></button>
+                            (click)="generar(dispositivoForm.value)" label="Generar" class="ui-button-info"
+                            [disabled]="selectedElement"></button>
 
                     </div>
                 </form>
@@ -115,20 +116,25 @@
                             <td>
                                 <button id="op" type="button" pButton icon="pi pi-trash" label="Eliminar"
                                     (click)="showDialog(rowData)" class="ui-button-danger"></button>
-                                <button type="button" pButton icon="pi pi-list" (click)="displayDialog = true"
+                                <button type="button" pButton icon="pi pi-list" (click)="generarArchivo(rowData.nombre)"
                                     class="ui-button-info" id="op"></button>
 
                             </td>
                         </tr>
                     </ng-template>
                 </p-table>
+                <p-panel *ngIf="codigoShow" header="Codigo Arduino">
+                    <span *ngFor="let item of codigo">
+                        <span style="margin: 0; padding:0; font-size: 9px; display: block;">{{ item }}</span>
+                    </span>
+                </p-panel>
             </p-tabPanel>
         </p-tabView>
     </p-card>
 </div>
 <p-dialog header="Adevertencia..." [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true"
     [style]="{width: '300px'}">
-    <!-- <p>Desea eliminar usuario??</p>
+    <p>Desea eliminar usuario??</p>
     <p-footer>
         <div class="ui-dialog-buttonpane ui-helper-clearfix">
             <button type="button" pButton icon="pi pi-times" (click)="eliminarDispositivo()" label="Eliminar"
@@ -136,5 +142,5 @@
             <button type="button" pButton icon="pi pi-save" (click)="closeDialog()" label="Cancelar"
                 style="font-size: .8em"></button>
         </div>
-    </p-footer> -->
+    </p-footer>
 </p-dialog>

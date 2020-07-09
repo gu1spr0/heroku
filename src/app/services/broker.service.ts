@@ -12,7 +12,6 @@ export class BrokerService {
     private mqttService: MqttService) {
   }
   topic(dispositivo: DispositivoDto): Observable<IMqttMessage> {
-    console.log(dispositivo);
     return this.mqttService.observe(dispositivo.sub);
   }
   // topic(): Observable<IMqttMessage> {

@@ -3,6 +3,7 @@ import { SelectItem, MessageService, FilterUtils } from 'primeng-lts/api';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { DispositivoDto } from './../../../models/dispositivo.dto';
 import { DispositivoService } from '../../../services/dispositivo.service';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-dispositivo',
   templateUrl: './dispositivo.component.html',
@@ -16,15 +17,17 @@ export class DispositivoComponent implements OnInit {
   displayDialog = false;
   cols: any[];
   dispositivoForm: FormGroup;
+  codigo: string[];
+  codigoShow = false;
   constructor(
     private dispositivoService: DispositivoService,
     private messageService: MessageService,
     private fb: FormBuilder,
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
     this.dispositivosTodos();
-
     this.dispositivoForm = this.fb.group({
       nombreDisp: new FormControl({ value: '', disabled: true }, Validators.required),
       marca: new FormControl('', Validators.required),
@@ -59,7 +62,6 @@ export class DispositivoComponent implements OnInit {
     this.dispositivoService.getDispositivosTodos().subscribe(
       res => {
         this.dispositivos = res;
-        console.log(this.dispositivos);
       },
       error => {
         const errorMessage = error;
@@ -117,7 +119,7 @@ export class DispositivoComponent implements OnInit {
     this.dispositivoForm.controls.subscriber.setValue(this.dispositivo.sub);
     this.dispositivoForm.controls.publisher.setValue(this.dispositivo.pub);
     this.dispositivoForm.controls.ip.setValue(this.dispositivo.ip);
-    console.log(this.dispositivo);
+    this.generarArchivo(this.dispositivo.nombre);
   }
 
   public guardarDispositivo(dispositivo: DispositivoDto) {
@@ -144,7 +146,8 @@ export class DispositivoComponent implements OnInit {
       dispositivo.pub = this.dispositivo.pub;
       dispositivo.ip = this.dispositivo.ip;
       dispositivo.valido = 'AC';
-      // console.log(dispositivo);
+      this.codigo = [];
+      this.codigoShow = false;
       this.guardarDispositivo(dispositivo);
     } else {
       /*if (this.selectedElement) {
@@ -173,6 +176,8 @@ export class DispositivoComponent implements OnInit {
     this.dispositivoForm.reset();
     this.selectedElement = false;
     this.operacion = true;
+    this.codigoShow = false;
+    this.codigo = [];
   }
   validForm() {
     if (this.dispositivoForm.valid || this.selectedElement) {
@@ -189,5 +194,17 @@ export class DispositivoComponent implements OnInit {
   closeDialog() {
     this.displayDialog = false;
   }
-
+  generarArchivo(id: string) {
+    const r = /ARD-100/gi;
+    this.dispositivoService.leerFichero().subscribe(
+      res => {
+        this.codigo = res.replace(r, id).split('\n');
+        this.codigoShow = true;
+        this.selectedElement = true;
+      },
+      error => {
+        const errorMessage = error;
+      }
+    );
+  }
 }
