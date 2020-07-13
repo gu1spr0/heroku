@@ -7,15 +7,15 @@
             <span class="elemento">Seguimiento</span>
             <i class="pi pi-globe"></i>
         </a>
-        <a routerLink="#" class="item">
+        <a routerLink="/acopio" class="item">
             <span class="elemento">Puntos de acopio</span>
             <i class="pi pi-map-marker"></i>
         </a>
-        <a routerLink="#" class="item">
+        <!-- <a routerLink="/reportes" class="item">
             <span class="elemento">Reportes</span>
             <i class="pi pi-file"></i>
-        </a>
-        <span *ngIf=" rol === 'ADMIN' || rol === 'SUPERVISOR'">
+        </a> -->
+        <!-- <span *ngIf="false">
             <li class="titulo">
                 <span>RUTAS</span>
             </li>
@@ -31,16 +31,16 @@
                 <span class="elemento">Horarios</span>
                 <i class="pi pi-clock"></i>
             </a>
-        </span>
+        </span> -->
         <span *ngIf=" rol === 'ADMIN' || rol === 'SUPERVISOR'">
             <li class="titulo">
                 <span>VEHICULO</span>
             </li>
-            <a href="#" class="item">
+            <a routerLink="/vehiculos" class="item">
                 <span class="elemento">Listar</span>
                 <i class="pi pi-compass"></i>
             </a>
-            <a href="#" class="item">
+            <a routerLink="/conductor" class="item">
                 <span class="elemento">Personal</span>
                 <i class="pi pi-users"></i>
             </a>

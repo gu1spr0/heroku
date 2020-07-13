@@ -64,4 +64,13 @@ body{
     .leaflet-control-attribution{
         display: none;
     }
+    .infoDispositivo{
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        li{
+            padding: .2em;
+
+        }
+    }
 }

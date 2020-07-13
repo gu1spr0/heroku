@@ -54,6 +54,10 @@ import { BrokerService } from './services/broker.service';
 import { AcopioComponent } from './components/module-geo/acopio/acopio.component';
 import { ReportesComponent } from './components/module-geo/reportes/reportes.component';
 import { MapaService } from './services/mapa.service';
+import { PuntosService } from './services/puntos.service';
+import { ConductorComponent } from './components/module-geo/conductor/conductor.component';
+import { ConductorService } from './services/conductor.service';
+import { VehiculoService } from './services/vehiculo.service';
 const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
   hostname: '68.183.101.117',
   connectOnCreate: true,
@@ -85,6 +89,7 @@ const config: SocketIoConfig = {
     RolesComponent,
     AcopioComponent,
     ReportesComponent,
+    ConductorComponent,
   ],
   imports: [
     BrowserModule,
@@ -114,7 +119,7 @@ const config: SocketIoConfig = {
     PasswordModule
   ],
   // tslint:disable-next-line: max-line-length
-  providers: [appRouteingProvider, BrokerService, DispositivoService, PersonaService, UsuarioService, DepartamentoService, RolService, MessageService, AuthService, HelperService, MapaService,
+  providers: [appRouteingProvider, VehiculoService, ConductorService, PuntosService, BrokerService, DispositivoService, PersonaService, UsuarioService, DepartamentoService, RolService, MessageService, AuthService, HelperService, MapaService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })

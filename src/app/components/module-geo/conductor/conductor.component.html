@@ -2,16 +2,16 @@
     <p-card styleClass="ui-card-shadow">
         <p-toast [style]="{marginTop: '80px'}"></p-toast>
         <p-tabView>
-            <p-tabPanel header="Vehiculos" leftIcon="pi pi-inbox">
-                <form [formGroup]="vehiculoForm" (ngSubmit)="onSubmit(vehiculoForm.value)">
+            <p-tabPanel header="Conductor" leftIcon="pi pi-inbox">
+                <form [formGroup]="conductorForm" (ngSubmit)="onSubmit(conductorForm.value)">
                     <div class="ui-g ui-fluid">
                         <div class="ui-g-12 ui-md-4 ui-sm-6">
                             <div class="ui-inputgroup">
                                 <span class="ui-float-label">
-                                    <p-dropdown [options]="estadosDispositivos" filter="true"
-                                        placeholder="Elija disositivo..." formControlName="dispositivo">
-                                        <ng-template let-dispositivo pTemplate="item">
-                                            <span>{{ dispositivo.label }}</span>
+                                    <p-dropdown [options]="estadosPersonas" filter="true" placeholder="Elija persona..."
+                                        formControlName="cedula">
+                                        <ng-template let-persona pTemplate="item">
+                                            <span>{{ persona.label }}</span>
                                         </ng-template>
                                     </p-dropdown>
                                 </span>
@@ -21,10 +21,10 @@
                         <div class="ui-g-12 ui-md-4 ui-sm-6">
                             <div class="ui-inputgroup">
                                 <span class="ui-float-label">
-                                    <p-dropdown [options]="estadosConductores" filter="true"
-                                        placeholder="Elija conductor..." formControlName="conductor">
-                                        <ng-template let-conductor pTemplate="item">
-                                            <span>{{ conductor.label }}</span>
+                                    <p-dropdown [options]="estadosCategorias" filter="true"
+                                        placeholder="Elija categoria..." formControlName="categoria">
+                                        <ng-template let-categoria pTemplate="item">
+                                            <span>{{ categoria.label }}</span>
                                         </ng-template>
                                     </p-dropdown>
                                 </span>
@@ -32,17 +32,16 @@
                         </div>
                     </div>
                     <div class="botones">
-                        <button id="boton" type="submit" pButton icon="pi pi-save" style="font-size: 8px;"
-                            label="Guardar" pButton [disabled]="!validForm()"></button>
-                        <button id="boton" type="button" pButton icon="pi pi-replay" (click)="clean()" label="Cancelar"
+                        <button id="boton" type="submit" pButton icon="pi pi-save" style="font-size: 8px;" label="Save"
+                            pButton [disabled]="!validForm()"></button>
+                        <button id="boton" type="button" pButton icon="pi pi-replay" (click)="clean()" label="Cancel"
                             class="ui-button-warning"></button>
-
                     </div>
                 </form>
-                <p-table #dt [columns]="cols" [value]="vehiculos" selectionMode="single" [(selection)]="selectedElement"
-                    [paginator]="true" [rows]="5" [responsive]="true">
+                <p-table #dt [columns]="cols" [value]="conductores" selectionMode="single"
+                    [(selection)]="selectedElement" [paginator]="true" [rows]="5" [responsive]="true">
                     <ng-template pTemplate="caption">
-                        <h3>LISTADO DE VEHICULOS</h3>
+                        <h3>LISTADO DE CONDUCTORES</h3>
                         <div style="text-align: center">
                             <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
                             <input type="text" pInputText size="30" placeholder="Buscar Usuario"
@@ -75,7 +74,6 @@
                             <td>
                                 <button id="op" type="button" pButton icon="pi pi-trash" label="Eliminar"
                                     class="ui-button-danger"></button>
-
                             </td>
                         </tr>
                     </ng-template>

@@ -22,6 +22,7 @@ export class AuthService {
       map((response: any) => {
         if (response && response.token) {
           localStorage.setItem('token', response.token);
+          this.router.navigate(['/']);
         }
         return response;
       })
@@ -39,6 +40,9 @@ export class AuthService {
     const helper = new JwtHelperService();
     const expirationDate = helper.getTokenExpirationDate(token);
     const isExpired = helper.isTokenExpired(token);
+    if (isExpired) {
+      this.logout();
+    }
     return !isExpired;
   }
   getCurrentUser() {

@@ -1,0 +1,48 @@
+.contMapa{
+    margin-left: 250px;
+    position: relative;
+    height: 100vh - 5.3vh;
+    z-index: 5 !important;
+    #mapa{
+      width: 100wv;
+      height: 100%;
+    }
+  }
+  @media only screen and (max-width: 320px){
+    .contMapa{
+      position: relative;
+      margin: 0;
+      padding: 0;
+      height: 60vh !important;
+      width: 100%;
+    }
+  }
+  
+  @media only screen and (max-width: 480px){
+    .contMapa{
+      position: relative;
+      margin: 0;
+      padding: 0;
+      height: 93.2vh !important;
+      width: 100%;
+    }
+  }
+  
+  @media only screen and (max-width: 599px){
+    .contMapa{
+      position: relative;
+      margin: 0;
+      padding: 0;
+      height: 100vh - 6.7vh !important;
+      width: 100%;
+    }
+  }
+  @media only screen and (max-width: 699px){
+    .contMapa{
+      position: relative;
+      margin: 0;
+      padding: 0;
+      height: 100vh - 5.3vh !important;
+      width: 100%;
+    }
+  }

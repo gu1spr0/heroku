@@ -12,7 +12,8 @@
     </div>
     <div class="opciones">
         <ul>
-            <li (click)="displayDialog = true"><a><i class="pi pi-sign-in"></i></a></li>
+            <li *ngIf="!authService.isLoggedIn()" (click)="displayDialog = true"><a><i class="pi pi-sign-in"></i></a>
+            </li>
             <li *ngIf="authService.isLoggedIn()"><a><i class="pi pi-cog"></i></a></li>
             <li *ngIf="authService.isLoggedIn()" (click)="salirLogin()"><a><i class="pi pi-sign-out"></i></a></li>
         </ul>

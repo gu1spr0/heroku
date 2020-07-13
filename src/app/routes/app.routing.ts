@@ -8,6 +8,10 @@ import { ConfiguracionComponent } from '../components/module-geo/configuracion/c
 import { RutaComponent } from '../components/module-geo/ruta/ruta.component';
 import { AuthGuard } from '../helpers/auth.guard';
 import { DispositivoComponent } from '../components/module-geo/dispositivo/dispositivo.component';
+import { AcopioComponent } from '../components/module-geo/acopio/acopio.component';
+import { ReportesComponent } from '../components/module-geo/reportes/reportes.component';
+import { ConductorComponent } from '../components/module-geo/conductor/conductor.component';
+import { VehiculoComponent } from '../components/module-geo/vehiculo/vehiculo.component';
 const appRoutes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
     { path: 'login', component: LoginComponent },
@@ -16,6 +20,10 @@ const appRoutes: Routes = [
     { path: 'configuracion', component: ConfiguracionComponent },
     { path: 'dispositivo', component: DispositivoComponent },
     { path: 'ruta', component: RutaComponent },
+    { path: 'acopio', component: AcopioComponent },
+    { path: 'reportes', component: ReportesComponent },
+    { path: 'conductor', component: ConductorComponent },
+    { path: 'vehiculos', component: VehiculoComponent },
     { path: '***', component: HomeComponent }
 ];
 

@@ -17,9 +17,10 @@ export class DispositivoService {
     return this.http.get(this.url + 'dispositivo/valid');
   }
   getDispositivoNombre(nombre: string): Observable<any> {
-    return this.http.get(this.url + 'dispositivo/nombre/' + nombre);
+    return this.http.get(this.url + 'dispositivo/iden/' + nombre);
   }
   guardarDispositivo(dispositivo: DispositivoDto): Observable<any> {
+    console.log(dispositivo);
     return this.http.post(this.url + 'dispositivo/', dispositivo);
   }
   modificarDispositivo(id, dispositivo: DispositivoDto): Observable<any> {
@@ -30,7 +31,5 @@ export class DispositivoService {
   }
   leerFichero(): Observable<any> {
     return this.http.get('assets/js/data.txt', { responseType: 'text' });
-
-
   }
 }
